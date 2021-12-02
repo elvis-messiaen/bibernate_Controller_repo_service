@@ -30,7 +30,18 @@ public class EmployeController {
 
     //creation d'un employes avec repository
     public void createRepo() {
+        Session session = sessionFactory.openSession();
         Employes aramis = new Employes();
+
+        aramis.setNom("lamarepo");
+        aramis.setPrenom("lamarepobleu");
+        aramis.setEmail("lamarepo@gmail.com");
+        aramis.setAge(55);
+        aramis.setFonction("caiboulangerssier");
+        aramis.setTel("0258741025");
+        aramis.setAdresse("999 rue des ours, 27000, berry");
+        
+        session.close();
         employeRepository.save(aramis);
     }
 
@@ -47,16 +58,6 @@ public class EmployeController {
         System.out.println("adresse " + employes.getAdresse());
         System.out.println("fonction " + employes.getFonction());
         System.out.println("age " + employes.getAge());
-     //  System.out.println(employeRepository.findById(id).getNom());
-
-/*        System.out.println("nom " + employes.getNom());
-        System.out.println("prenom " + employes.getPrenom());
-        System.out.println("email " + employes.getEmail());
-        System.out.println("age " + employes.getAge());
-        System.out.println("fonction " + employes.getFonction());
-        System.out.println("tel " + employes.getTel());
-        System.out.println("adresse " + employes.getAdresse());
-        System.out.println("test");*/
         session.close();
         return employes;
     }
