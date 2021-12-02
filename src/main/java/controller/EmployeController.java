@@ -7,11 +7,10 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-public class EmployeController<EmployeRepository> {
+public class EmployeController {
     public SessionFactory sessionFactory;
     // essaie de recuperation du repository sans les annotations
-    public EmployeRepository employeRepository;
-
+    private EmployeRepository employeRepository;
 
     public void setup() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
@@ -25,9 +24,43 @@ public class EmployeController<EmployeRepository> {
         }
     }
 
-    public  void exit(){
+    public void exit() {
         sessionFactory.close();
     }
+
+    //creation d'un employes avec repository
+    public void createRepo() {
+        Employes aramis = new Employes();
+        employeRepository.save(aramis);
+    }
+
+    // methode pour lire depuis l'interface repository sans data jpa
+    public Employes readRepo(long id) {
+        Session session = sessionFactory.openSession();
+        Employes employes = session.get(Employes.class, id);
+       // employeRepository.findById(employes.getId());
+        System.out.println("id " + employes.getId());
+        System.out.println("nom " + employes.getNom());
+        System.out.println("prenom " + employes.getPrenom());
+        System.out.println("email " + employes.getEmail());
+        System.out.println("tel " + employes.getTel());
+        System.out.println("adresse " + employes.getAdresse());
+        System.out.println("fonction " + employes.getFonction());
+        System.out.println("age " + employes.getAge());
+     //  System.out.println(employeRepository.findById(id).getNom());
+
+/*        System.out.println("nom " + employes.getNom());
+        System.out.println("prenom " + employes.getPrenom());
+        System.out.println("email " + employes.getEmail());
+        System.out.println("age " + employes.getAge());
+        System.out.println("fonction " + employes.getFonction());
+        System.out.println("tel " + employes.getTel());
+        System.out.println("adresse " + employes.getAdresse());
+        System.out.println("test");*/
+        session.close();
+        return employes;
+    }
+
 
 
 

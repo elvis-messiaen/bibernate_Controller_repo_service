@@ -7,7 +7,8 @@ public class EmployeManager {
 
         EmployeController employeController = new EmployeController();
         employeController.setup();
-        employeController.create();
+       // employeController.create();
+        employeController.readRepo(2);
         // manager.read(2);
         //Employes employes = manager.read(4);
        // employes.setFonction("Scrum master");
